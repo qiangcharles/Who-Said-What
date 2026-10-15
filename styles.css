@@ -33,7 +33,7 @@
 	overflow: visible;
 }
 
-.dialogue-line
+.dialogue-line,
 + .dialogue-line {
 	margin-top: 1.2rem !important;
 }
