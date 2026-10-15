@@ -1,8 +1,427 @@
-/*
+/* =========================================================
+   Dialogue boxes
+   ========================================================= */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.dialogue-line {
+	--border-colour:
+		color-mix(
+			in srgb,
+			var(--character-colour) 55%,
+			var(--background-modifier-border)
+		);
 
-If your plugin does not need CSS, delete this file.
+	position: relative;
+	display: block;
+	box-sizing: border-box;
 
-*/
+	margin: 0.8rem 0 !important;
+	padding: 0.65rem 1rem 0.55rem !important;
+
+	border: 1.5px solid
+	var(--border-colour) !important;
+
+	border-radius: 12px;
+
+	background:
+		color-mix(
+			in srgb,
+			var(--character-colour) 11%,
+			var(--background-primary)
+		);
+
+	line-height: 1.45;
+	overflow: visible;
+}
+
+.dialogue-line
++ .dialogue-line {
+	margin-top: 1.2rem !important;
+}
+
+/* =========================================================
+   Dialogue character label
+   ========================================================= */
+
+.character-label {
+	position: absolute;
+	top: 0;
+	left: 1rem;
+	z-index: 1;
+
+	display: inline-block;
+	padding: 0.12rem 0.4rem;
+
+	color: var(--text-normal);
+	background: var(--border-colour);
+
+	font-size: 0.7em;
+	font-weight: 650;
+	line-height: 1.15;
+	white-space: nowrap;
+
+	border-radius: 4px;
+	transform: translateY(-50%);
+}
+
+/* =========================================================
+   Spoken dialogue
+   ========================================================= */
+
+.dialogue-quote {
+	color:
+		color-mix(
+			in srgb,
+			var(--character-colour) 82%,
+			var(--text-normal)
+		);
+
+	font-weight: 750;
+}
+
+/* =========================================================
+   Thoughts
+   ========================================================= */
+
+.thought-line {
+	border-width: 1.5px !important;
+	border-style: dashed !important;
+
+	border-color:
+		color-mix(
+			in srgb,
+			var(--character-colour) 55%,
+			var(--background-modifier-border)
+		) !important;
+
+	border-radius: 18px;
+
+	background:
+		color-mix(
+			in srgb,
+			var(--character-colour) 9%,
+			var(--background-primary)
+		);
+
+	font-style: italic;
+}
+
+.thought-line::after {
+	content: none;
+	display: none;
+}
+
+.thought-parenthesis {
+	display: none;
+}
+
+/* =========================================================
+   Dialogue selection
+   ========================================================= */
+
+.dialogue-line:has(
+  .cm-selectionBackground
+) {
+	outline: 2px solid
+	color-mix(
+		in srgb,
+		var(--character-colour) 55%,
+		transparent
+	);
+
+	outline-offset: 2px;
+}
+
+/* =========================================================
+   Character editor modal
+   ========================================================= */
+
+.character-editor-modal {
+	width: min(900px, 92vw);
+	max-width: 900px;
+}
+
+.character-editor-modal
+.modal-content {
+	overflow-x: hidden;
+}
+
+.character-editor-path {
+	padding: 0.25rem 0.5rem;
+
+	color: var(--text-muted);
+
+	font-family: var(--font-monospace, monospace);
+	font-size: 0.8rem;
+
+	line-height: 1.4;
+
+	overflow-wrap: anywhere;
+}
+
+.character-editor-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+
+	margin: 0.5rem 0;
+}
+
+.character-editor-empty {
+	margin: 0;
+	color: var(--text-muted);
+}
+
+/* =========================================================
+   Character cards
+   ========================================================= */
+
+.character-editor-card {
+	padding: 0.75rem;
+
+	border: 1.5px solid
+	color-mix(
+		in srgb,
+		var(--character-colour) 55%,
+		var(--background-modifier-border)
+	);
+
+	border-radius: 12px;
+
+	background:
+		color-mix(
+			in srgb,
+			var(--character-colour) 7%,
+			var(--background-primary)
+		);
+}
+
+.character-editor-heading {
+	margin: 0 0 0.45rem;
+
+	color:
+		color-mix(
+			in srgb,
+			var(--character-colour) 80%,
+			var(--text-normal)
+		);
+
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+/* =========================================================
+   Character editor layout
+   ========================================================= */
+
+.character-editor-body {
+	display: grid;
+
+	grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+	gap: 0.75rem;
+	align-items: end;
+}
+
+.character-editor-fields {
+	display: grid;
+
+	grid-template-columns:
+    minmax(10rem, 1fr)
+    minmax(14rem, 1.35fr)
+    minmax(9rem, 0.72fr);
+
+	gap: 1rem;
+	min-width: 0;
+	align-items: start;
+}
+
+/* =========================================================
+   Individual fields
+   ========================================================= */
+
+.character-editor-fields
+> .setting-item {
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: stretch !important;
+	justify-content: flex-start !important;
+
+	box-sizing: border-box;
+	min-width: 0;
+	min-height: 0;
+
+	margin: 0 !important;
+	padding: 0 !important;
+
+	border: none !important;
+	border-top: none !important;
+
+	gap: 0.08rem;
+}
+
+.character-editor-fields
+> .setting-item::before,
+.character-editor-fields
+> .setting-item::after {
+	display: none !important;
+	content: none !important;
+}
+
+/* Labels */
+
+.character-editor-fields
+.setting-item-info {
+	display: block;
+	flex: none;
+
+	box-sizing: border-box;
+	width: 100%;
+	height: 1.15rem;
+	min-width: 0;
+	min-height: 1.15rem;
+
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.character-editor-fields
+.setting-item-name {
+	display: block;
+
+	margin: 0;
+	padding: 0;
+
+	color: var(--text-muted);
+
+	font-size: 0.8rem;
+	line-height: 1rem;
+}
+
+.character-editor-fields
+.setting-item-description {
+	display: none;
+}
+
+/* Input row */
+
+.character-editor-fields
+.setting-item-control {
+	display: flex;
+	flex: none;
+
+	align-items: center !important;
+	justify-content: flex-start !important;
+
+	box-sizing: border-box;
+	width: 100%;
+	height: 2.5rem;
+	min-width: 0;
+
+	margin: 0 !important;
+	padding: 0 !important;
+
+	gap: 0.35rem;
+}
+
+/* Text inputs */
+
+.character-editor-fields
+input[type="text"] {
+	box-sizing: border-box;
+
+	width: 100%;
+	height: 2.5rem;
+	min-width: 0;
+
+	margin: 0 !important;
+}
+
+/* Colour picker */
+
+.character-editor-fields
+input[type="color"] {
+	box-sizing: border-box;
+
+	width: 2.25rem;
+	height: 2.25rem;
+	min-width: 2.25rem;
+
+	flex: 0 0 2.25rem;
+
+	margin: 0 !important;
+	padding: 0;
+}
+
+/* Make the colour text field narrower. */
+
+.character-editor-fields
+> .setting-item:last-child
+input[type="text"] {
+	width: 7.5rem;
+	max-width: 7.5rem;
+}
+
+/* =========================================================
+   Character controls
+   ========================================================= */
+
+.character-editor-controls {
+	align-self: end;
+}
+
+.character-editor-controls
+.setting-item {
+	min-height: 2.5rem;
+
+	margin: 0 !important;
+	padding: 0 !important;
+
+	border: none !important;
+}
+
+.character-editor-controls
+.setting-item-info {
+	display: none;
+}
+
+.character-editor-controls
+.setting-item-control {
+	display: flex;
+	align-items: center;
+
+	height: 2.5rem;
+	gap: 0.35rem;
+}
+
+.character-editor-actions {
+	padding-top: 0.75rem;
+}
+
+/* =========================================================
+   Narrow modal fallback
+   ========================================================= */
+
+@media (max-width: 760px) {
+	.character-editor-body {
+		grid-template-columns: 1fr;
+	}
+
+	.character-editor-fields {
+		grid-template-columns: 1fr;
+		gap: 0.5rem;
+	}
+
+	.character-editor-fields
+	> .setting-item:last-child
+	input[type="text"] {
+		width: 100%;
+		max-width: none;
+	}
+
+	.character-editor-controls {
+		justify-self: end;
+	}
+}
