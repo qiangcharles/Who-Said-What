@@ -102,7 +102,7 @@ export class CharacterEditorModal extends Modal {
 			.setName("Aliases")
 			.addText((text) => {
 				text
-					.setPlaceholder("Alias 1, Alias 2")
+					.setPlaceholder("Alias 1, alias 2")
 					.setValue(character.aliases.join(", "))
 					.setDisabled(this.isSaving)
 					.onChange((value) => {
@@ -165,7 +165,6 @@ export class CharacterEditorModal extends Modal {
 				button
 					.setIcon("trash")
 					.setTooltip("Delete")
-					.setWarning()
 					.setDisabled(this.isSaving)
 					.onClick(() => this.deleteCharacter(index));
 			});
