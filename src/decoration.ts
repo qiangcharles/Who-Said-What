@@ -88,7 +88,7 @@ function buildDecorations(
 					})
 				);
 				builder.add(
-					line.from + parsed.nameFrom,
+					line.from,
 					line.from + parsed.nameTo,
 					Decoration.replace({
 						widget: new CharacterLabelWidget(parsed.character.name),
